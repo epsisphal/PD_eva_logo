@@ -1,0 +1,28 @@
+%text encoding = UTF-8 Unicode
+%compil with XeLaTex
+% created: [2016/07/14]
+% last modification: [2014/07/14]
+% title: programming example for PD 
+
+\documentclass{standalone}
+\usepackage{fontspec}	
+\usepackage[zerostyle=d]{newtxtt} % TX typewriter font
+\newfontfamily\gaga[Mapping=tex-text, RawFeature=+dlig]{EB Garamond}	
+
+\usepackage{polyglossia}
+\setdefaultlanguage{french}
+
+\usepackage{calc}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows, shapes, positioning, decorations.markings, calc,hobby, decorations.text}
+
+\input{in_logo_last}
+\definecolor{mycolor}{RGB}{255, 255, 255}
+
+\begin{document}
+\begin{tikzpicture}
+\pic[scale=1, ultra thick] at (0,0) {logo};
+\end{tikzpicture}
+\end{document}
+

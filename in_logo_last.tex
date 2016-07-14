@@ -1,0 +1,85 @@
+
+\tikzset{
+    chrysantheme/.pic={
+    \draw (0,0)[fill=mycolor, very thick] circle (0.2);
+    \foreach \n in {1,...,16}
+	{
+	\draw[fill=mycolor, very thick] ({0.2*cos(\n*22.5-11.25)}, {-0.2*sin(\n*22.5-11.25)}) -- 
+		({0.9*cos(\n*22.5-11.25)}, {-0.9*sin(\n*22.5-11.25)})
+		arc ({-(\n-1)*22.5-asin(0.9/0.2*sin(11.25))}: {-(\n-1)*22.5+asin(0.9/0.2*sin(11.25))}: 0.2)
+		-- ({0.2*cos((\n-1)*22.5-11.25)}, {-0.2*sin((\n-1)*22.5-11.25)})
+		arc ({-(\n-1)*22.5+11.25}: {-(\n-1)*22.5-11.25}: 0.2);
+	}
+}}
+
+\tikzset{
+    chrysantheme_2/.pic={
+    \draw (0,0)[fill=black] circle (0.2);
+    \foreach \n in {1,...,16}
+	{
+	\draw[fill=black] ({0.2*cos(\n*22.5-11.25)}, {-0.2*sin(\n*22.5-11.25)}) -- 
+		({0.9*cos(\n*22.5-11.25)}, {-0.9*sin(\n*22.5-11.25)})
+		arc ({-(\n-1)*22.5-asin(0.9/0.2*sin(11.25))}: {-(\n-1)*22.5+asin(0.9/0.2*sin(11.25))}: 0.2)
+		-- ({0.2*cos((\n-1)*22.5-11.25)}, {-0.2*sin((\n-1)*22.5-11.25)})
+		arc ({-(\n-1)*22.5+11.25}: {-(\n-1)*22.5-11.25}: 0.2);
+	}
+}}
+
+\def \angle {30}
+\def \rint {0.25}
+\def \rbout {0.25}
+\def \l {0.85}
+
+\tikzset{
+    chrysantheme_12/.pic={
+    \draw (0,0)[fill=white] circle (\rint);
+    \foreach \n in {1,...,12}
+	{
+	\draw[fill=white] ({\rint*cos(\n*\angle-\angle/2)}, {-\rint*sin(\n*\angle-\angle/2)}) -- 
+		({\l*cos(\n*\angle-\angle/2)}, {-\l*sin(\n*\angle-\angle/2)})
+		arc ({-(\n-1)*\angle-asin(\l/\rbout*sin(\angle/2))}: {-(\n-1)*\angle+asin(\l/\rbout*sin(\angle/2))}: \rbout)
+		-- ({\rint*cos((\n-1)*\angle-\angle/2)}, {-\rint*sin((\n-1)*\angle-\angle/2)})
+		arc ({-(\n-1)*\angle+\angle/2}: {-(\n-1)*\angle-\angle/2}: \rint);
+	}
+}}
+
+\tikzset{
+    logo/.pic={
+	\def \square {0.4};
+	\def \wdc {1.35};
+	\def \oc {1.44};
+	\def \mc {(\wdc-\square)+(\oc-(\wdc-\square))/2};
+	
+	\path[draw=black, fill=mycolor] (0,0) circle (\oc); % outer circle
+	
+	\draw[] (-\wdc+\square,-\square/2) % bottom demi-circle
+		arc (-180+atan(\square/2/(\wdc-\square)):-atan(\square/2/(\wdc-\square)):{\square/2/sin(atan(\square/2/(\wdc-\square)))}) -- cycle;
+	
+	\draw[fill=black] (-\wdc+\square,\square/2) 
+		arc (180-atan(\square/2/(\wdc-\square)):atan(\square/2/(\wdc-\square)):{\square/2/sin(atan(\square/2/(\wdc-\square)))}) -- cycle;
+	\begin{scope}
+	\clip (-\wdc+\square,\square/2) 
+		arc (180-atan(\square/2/(\wdc-\square)):atan(\square/2/(\wdc-\square)):{\square/2/sin(atan(\square/2/(\wdc-\square)))}) -- cycle;
+	\pic[scale=0.8, draw=black, very thick] at (-0.4,0.19) {chrysantheme_12};
+	\end{scope} 
+	\draw[] (-\wdc+\square,\square/2) 
+		arc (180-atan(\square/2/(\wdc-\square)):atan(\square/2/(\wdc-\square)):{\square/2/sin(atan(\square/2/(\wdc-\square)))}) -- cycle;
+	
+	\path [postaction={decorate, decoration={raise=-0.7ex, text along path, reverse path,text align=center, text={|\normalsize \ttz |Les éditions}}}] (0,0) ++(20:{\mc}) arc (20:160:{\mc});
+	
+	\path [postaction={decorate, decoration={raise=-0.7ex, text along path, reverse path,text align=center, text={|\normalsize \ttz |Val-Âpre}}}] (0,0) ++(-10:{\mc}) arc (-10:-170:{\mc});
+	
+	\path [postaction={decorate, decoration={raise=-0.35ex, text along path, text align=center, text={|\footnotesize \ttz \scshape|Paris-Tokyo}}}] (-1,-0.05) -- (1,-0.05);
+	
+	\path[fill=black] ({\mc}, 0) circle(0.1); % small dots
+	\path[fill=black] ({-(\mc)}, 0) circle(0.1); 
+	
+	\path [postaction={decorate, decoration={raise=0ex, text along path, text align=center, text={|\footnotesize \gaga \itshape |Depuis}}}] (-1,-0.5) -- (1,-0.5);
+	
+	\path [postaction={decorate, decoration={raise=0ex, text along path, reverse path, text align=center, text={|\footnotesize \gaga \itshape |2015}}}]  (0,0) ++(-10:0.8) arc (-10:-170:0.8);
+
+	%guide lines
+%	\draw[red] (0,0) circle (\wdc-\square);
+%	\draw[red] (0,0) circle (\oc);
+%	\draw[red] (0,0) circle (\mc);
+}}
